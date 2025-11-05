@@ -1,0 +1,14 @@
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.csproj.AssemblyReference.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.AssemblyInfoInputs.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.AssemblyInfo.cs
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.csproj.CoreCompileInputs.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\bin\Debug\net9.0\ApprovalSystem.Models.deps.json
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\bin\Debug\net9.0\ApprovalSystem.Models.runtimeconfig.json
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\bin\Debug\net9.0\ApprovalSystem.Models.dll
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\bin\Debug\net9.0\ApprovalSystem.Models.pdb
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.dll
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\refint\ApprovalSystem.Models.dll
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.pdb
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.genruntimeconfig.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ref\ApprovalSystem.Models.dll

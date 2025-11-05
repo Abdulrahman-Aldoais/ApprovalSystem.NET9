@@ -1,0 +1,5 @@
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Services\obj\Debug\net9.0\ApprovalSystem.Services.csproj.AssemblyReference.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Services\obj\Debug\net9.0\ApprovalSystem.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Services\obj\Debug\net9.0\ApprovalSystem.Services.AssemblyInfoInputs.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Services\obj\Debug\net9.0\ApprovalSystem.Services.AssemblyInfo.cs
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Services\obj\Debug\net9.0\ApprovalSystem.Services.csproj.CoreCompileInputs.cache

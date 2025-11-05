@@ -1,0 +1,7 @@
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.API\obj\Debug\net9.0\ApprovalSystem.API.csproj.AssemblyReference.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.API\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.API\obj\Debug\net9.0\ApprovalSystem.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.API\obj\Debug\net9.0\ApprovalSystem.API.AssemblyInfoInputs.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.API\obj\Debug\net9.0\ApprovalSystem.API.AssemblyInfo.cs
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.API\obj\Debug\net9.0\ApprovalSystem.API.csproj.CoreCompileInputs.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.API\obj\Debug\net9.0\ApprovalSystem.API.MvcApplicationPartsAssemblyInfo.cache
