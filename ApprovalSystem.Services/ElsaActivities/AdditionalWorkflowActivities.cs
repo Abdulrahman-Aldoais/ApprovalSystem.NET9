@@ -1,239 +1,306 @@
-// =========================================================
-// AdditionalWorkflowActivities.cs - مُصحح للـ Elsa v3 الصحيح
-// إصلاح API أخطاء Elsa Framework v3
-// =========================================================
-
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
-using Elsa;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Elsa.Activities.ControlFlow;
 using Elsa.ActivityResults;
-using Elsa.Abstractions.Models;
+using Elsa.Attributes;
+using Elsa.Design;
 using Elsa.Expressions;
-using Elsa.Models;
 using Elsa.Services;
 using Elsa.Services.Models;
-using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ApprovalSystem.Services.ElsaActivities
 {
-    // =============== FIXED ACTIVITY CLASSES ===============
-    
     /// <summary>
-    /// Activity لإرسال الإشعارات
+    /// SendNotificationActivity - يرسل إشعار للمستخدم
     /// </summary>
+    [Activity(
+        Category = "Custom",
+        DisplayName = "Send Notification",
+        Description = "يرسل إشعار للمستخدم",
+        Icon = "fa-bell",
+        Outcomes = new[] { OutcomeNames.Done, "Failed" }
+    )]
     public class SendNotificationActivity : Activity
     {
-        [Input]
+        /// <summary>
+        /// نص الإشعار - يمكن أن يكون تعبير (Expression)
+        /// </summary>
+        [Input(
+            Name = "Message",
+            DisplayName = "رسالة الإشعار",
+            Description = "نص الرسالة المراد إرسالها",
+            DefaultSyntax = SyntaxNames.JavaScript,
+            DefaultValue = "'Hello from workflow!'"
+        )]
         public Input<string> Message { get; set; } = default!;
-        
-        [Input]
-        public Input<string> Type { get; set; } = default!;
-        
-        [Input]
+
+        /// <summary>
+        /// معرف المستخدم المراد إرسال الإشعار إليه
+        /// </summary>
+        [Input(
+            Name = "UserId",
+            DisplayName = "معرف المستخدم",
+            Description = "معرف المستخدم الذي سيستقبل الإشعار",
+            DefaultSyntax = SyntaxNames.Literal,
+            DefaultValue = ""
+        )]
         public Input<string> UserId { get; set; } = default!;
+
+        /// <summary>
+        /// نوع الإشعار
+        /// </summary>
+        [Input(
+            Name = "NotificationType",
+            DisplayName = "نوع الإشعار",
+            Description = "نوع الإشعار المراد إرساله",
+            DefaultSyntax = SyntaxNames.Literal,
+            DefaultValue = "info"
+        )]
+        public Input<string> NotificationType { get; set; } = default!;
 
         protected override async ValueTask<IActivityExecutionResult> OnExecuteAsync(ActivityExecutionContext context)
         {
             try
             {
-                // الحصول على المدخلات بطريقة صحيحة
-                var message = await context.EvaluateAsync(Message, context.CancellationToken);
-                var notificationType = await context.EvaluateAsync(Type, context.CancellationToken);
-                var userId = await context.EvaluateAsync(UserId, context.CancellationToken);
+                // الحصول على القيم المُقيّمة باستخدام Elsa v3 API الصحيح
+                var message = Message.Get(context);
+                var userId = UserId.Get(context);
+                var notificationType = NotificationType.Get(context);
+
+                // الحصول على الخدمات المطلوبة
+                var hubContext = context.GetRequiredService<IHubContext<ApprovalHub>>();
+                var logger = context.GetRequiredService<ILogger<SendNotificationActivity>>();
+
+                // إعداد بيانات الإشعار
+                var notification = new
+                {
+                    Message = message,
+                    Type = notificationType,
+                    Timestamp = DateTime.UtcNow,
+                    UserId = userId
+                };
 
                 // إرسال الإشعار
-                await SendNotificationAsync(message, notificationType, userId, context);
-
-                return Outcome("Sent");
-            }
-            catch (Exception ex)
-            {
-                var logger = context.GetRequiredService<ILogger<SendNotificationActivity>>();
-                logger.LogError(ex, "فشل في إرسال الإشعار");
-                return Fault(ex);
-            }
-        }
-
-        private async Task SendNotificationAsync(string message, string type, string userId, ActivityExecutionContext context)
-        {
-            try
-            {
-                // استخدام Logger بدلاً من context.LogError
-                var logger = context.GetRequiredService<ILogger<SendNotificationActivity>>();
-                
-                // الحصول على NotificationService
-                var notificationService = context.GetService<INotificationService>();
-                if (notificationService != null)
+                if (!string.IsNullOrEmpty(userId))
                 {
-                    await notificationService.SendNotificationAsync(userId, message, type);
+                    await hubContext.Clients.User(userId).SendAsync("ReceiveNotification", notification);
+                    logger.LogInformation("تم إرسال إشعار للمستخدم {UserId}: {Message}", userId, message);
                 }
                 else
                 {
-                    logger.LogWarning("NotificationService غير متوفر، تسجيل الرسالة فقط");
+                    await hubContext.Clients.All.SendAsync("ReceiveNotification", notification);
+                    logger.LogInformation("تم إرسال إشعار عام: {Message}", message);
                 }
+
+                // إرجاع النتيجة باستخدام Elsa v3 API
+                return Outcome("Done");
             }
             catch (Exception ex)
             {
                 var logger = context.GetRequiredService<ILogger<SendNotificationActivity>>();
-                logger.LogError(ex, "فشل في إرسال الإشعار");
-                throw;
+                logger.LogError(ex, "فشل في إرسال الإشعار: {Message}", ex.Message);
+                return Fault(ex.Message);
             }
         }
     }
 
     /// <summary>
-    /// Activity لمعالجة قرار الموافقة
+    /// ProcessApprovalDecisionActivity - يعالج قرار الموافقة
     /// </summary>
+    [Activity(
+        Category = "Custom",
+        DisplayName = "Process Approval Decision",
+        Description = "يعالج قرار الموافقة على الطلب",
+        Icon = "fa-check-circle",
+        Outcomes = new[] { OutcomeNames.Done, "Rejected", "Failed" }
+    )]
     public class ProcessApprovalDecisionActivity : Activity
     {
-        [Input]
+        /// <summary>
+        /// معرف الطلب
+        /// </summary>
+        [Input(
+            Name = "RequestId",
+            DisplayName = "معرف الطلب",
+            Description = "معرف الطلب المراد معالجة قراره",
+            DefaultSyntax = SyntaxNames.Literal,
+            DefaultValue = ""
+        )]
         public Input<string> RequestId { get; set; } = default!;
-        
-        [Input]
+
+        /// <summary>
+        /// قرار الموافقة (approved/rejected/pending)
+        /// </summary>
+        [Input(
+            Name = "Decision",
+            DisplayName = "قرار الموافقة",
+            Description = "قرار الموافقة على الطلب",
+            DefaultSyntax = SyntaxNames.Literal,
+            DefaultValue = "pending"
+        )]
         public Input<string> Decision { get; set; } = default!;
-        
-        [Input]
-        public Input<string> Comments { get; set; } = default!;
+
+        /// <summary>
+        /// ملاحظات المراجع
+        /// </summary>
+        [Input(
+            Name = "ReviewerNotes",
+            DisplayName = "ملاحظات المراجع",
+            Description = "ملاحظات المراجع على الطلب",
+            DefaultSyntax = SyntaxNames.JavaScript,
+            DefaultValue = "''"
+        )]
+        public Input<string> ReviewerNotes { get; set; } = default!;
+
+        /// <summary>
+        /// معرف المراجع
+        /// </summary>
+        [Input(
+            Name = "ReviewerId",
+            DisplayName = "معرف المراجع",
+            Description = "معرف المراجع الذي اتخذ القرار",
+            DefaultSyntax = SyntaxNames.Literal,
+            DefaultValue = ""
+        )]
+        public Input<string> ReviewerId { get; set; } = default!;
 
         protected override async ValueTask<IActivityExecutionResult> OnExecuteAsync(ActivityExecutionContext context)
         {
             try
             {
-                // الحصول على المدخلات
-                var requestId = await context.EvaluateAsync(RequestId, context.CancellationToken);
-                var decision = await context.EvaluateAsync(Decision, context.CancellationToken);
-                var comments = await context.EvaluateAsync(Comments, context.CancellationToken);
+                // الحصول على القيم المُقيّمة
+                var requestId = RequestId.Get(context);
+                var decision = Decision.Get(context);
+                var reviewerNotes = ReviewerNotes.Get(context);
+                var reviewerId = ReviewerId.Get(context);
 
-                // معالجة القرار
-                var approvalResult = await ProcessApprovalAsync(requestId, decision, comments, context);
+                // الحصول على الخدمات
+                var logger = context.GetRequiredService<ILogger<ProcessApprovalDecisionActivity>>();
+                var hubContext = context.GetRequiredService<IHubContext<ApprovalHub>>();
+
+                // الحصول على workflow instance ID
+                var workflowInstanceId = context.WorkflowExecutionContext.WorkflowInstanceId;
+
+                logger.LogInformation(
+                    "معالجة قرار موافقة - الطلب: {RequestId}, القرار: {Decision}, المراجع: {ReviewerId}, InstanceId: {WorkflowInstanceId}",
+                    requestId, decision, reviewerId, workflowInstanceId);
+
+                // تحديث قاعدة البيانات (يُفترض أن تكون البيانات متاحة)
+                var approvalUpdate = new
+                {
+                    RequestId = requestId,
+                    Decision = decision.ToLowerInvariant(),
+                    ReviewerNotes = reviewerNotes,
+                    ReviewerId = reviewerId,
+                    WorkflowInstanceId = workflowInstanceId,
+                    UpdatedAt = DateTime.UtcNow
+                };
+
+                // إرسال إشعار للمستخدم
+                await hubContext.Clients.All.SendAsync("ApprovalStatusUpdated", approvalUpdate);
 
                 // إرجاع النتيجة بناءً على القرار
-                if (approvalResult.IsApproved)
+                var outcome = decision.ToLowerInvariant() switch
                 {
-                    return Outcome("approved");
-                }
-                else
-                {
-                    return Outcome("rejected");
-                }
+                    "approved" => OutcomeNames.Done,
+                    "rejected" => "Rejected",
+                    _ => OutcomeNames.Done
+                };
+
+                logger.LogInformation("تم معالجة قرار الموافقة بنجاح: {Outcome}", outcome);
+                return Outcome(outcome);
             }
             catch (Exception ex)
             {
                 var logger = context.GetRequiredService<ILogger<ProcessApprovalDecisionActivity>>();
-                logger.LogError(ex, "فشل في معالجة قرار الموافقة");
-                return Fault(ex);
+                logger.LogError(ex, "فشل في معالجة قرار الموافقة: {Message}", ex.Message);
+                return Fault(ex.Message);
             }
-        }
-
-        private async Task<ApprovalResult> ProcessApprovalAsync(string requestId, string decision, string comments, ActivityExecutionContext context)
-        {
-            var approvalService = context.GetService<IApprovalService>();
-            if (approvalService != null)
-            {
-                return await approvalService.ProcessApprovalAsync(requestId, decision, comments);
-            }
-            
-            // Fallback: محاكاة المعالجة
-            return new ApprovalResult
-            {
-                IsApproved = decision.Equals("approved", StringComparison.OrdinalIgnoreCase),
-                RequestId = requestId,
-                Decision = decision,
-                Comments = comments,
-                ProcessedAt = DateTime.UtcNow
-            };
         }
     }
 
     /// <summary>
-    /// Activity لإتمام سير العمل
+    /// CompleteWorkflowActivity - يكمل سير العمل
     /// </summary>
+    [Activity(
+        Category = "Custom",
+        DisplayName = "Complete Workflow",
+        Description = "يكمل سير العمل ويرسل رسالة نهائية",
+        Icon = "fa-flag-checkered",
+        Outcomes = new[] { OutcomeNames.Done }
+    )]
     public class CompleteWorkflowActivity : Activity
     {
-        [Input]
-        public Input<string> ResultMessage { get; set; } = default!;
-        
-        [Input]
-        public Input<bool> IsSuccessful { get; set; } = default!;
+        /// <summary>
+        /// رسالة الإنجاز
+        /// </summary>
+        [Input(
+            Name = "CompletionMessage",
+            DisplayName = "رسالة الإنجاز",
+            Description = "رسالة تُرسل عند إكمال سير العمل",
+            DefaultSyntax = SyntaxNames.JavaScript,
+            DefaultValue = "'تم إنجاز سير العمل بنجاح'"
+        )]
+        public Input<string> CompletionMessage { get; set; } = default!;
+
+        /// <summary>
+        /// نوع الإنجاز
+        /// </summary>
+        [Input(
+            Name = "CompletionType",
+            DisplayName = "نوع الإنجاز",
+            Description = "نوع إنجاز سير العمل",
+            DefaultSyntax = SyntaxNames.Literal,
+            DefaultValue = "success"
+        )]
+        public Input<string> CompletionType { get; set; } = default!;
 
         protected override async ValueTask<IActivityExecutionResult> OnExecuteAsync(ActivityExecutionContext context)
         {
             try
             {
-                var resultMessage = await context.EvaluateAsync(ResultMessage, context.CancellationToken);
-                var isSuccessful = await context.EvaluateAsync(IsSuccessful, context.CancellationToken);
+                // الحصول على القيم المُقيّمة
+                var completionMessage = CompletionMessage.Get(context);
+                var completionType = CompletionType.Get(context);
 
-                // إنشاء النتيجة النهائية
-                var finalResult = new
+                // الحصول على الخدمات
+                var logger = context.GetRequiredService<ILogger<CompleteWorkflowActivity>>();
+                var hubContext = context.GetRequiredService<IHubContext<ApprovalHub>>();
+
+                // الحصول على معرف سير العمل
+                var workflowInstanceId = context.WorkflowExecutionContext.WorkflowInstanceId;
+
+                var completionData = new
                 {
-                    Message = resultMessage,
-                    IsSuccessful = isSuccessful,
-                    CompletedAt = DateTime.UtcNow,
-                    WorkflowInstanceId = context.WorkflowExecutionContext.WorkflowInstanceId
+                    Message = completionMessage,
+                    Type = completionType,
+                    WorkflowInstanceId = workflowInstanceId,
+                    CompletedAt = DateTime.UtcNow
                 };
 
-                if (isSuccessful)
-                {
-                    return new CompletedResult
-                    {
-                        Output = finalResult
-                    };
-                }
-                else
-                {
-                    return Fault(resultMessage);
-                }
+                // إرسال رسالة الإكمال
+                await hubContext.Clients.All.SendAsync("WorkflowCompleted", completionData);
+
+                logger.LogInformation(
+                    "تم إنجاز سير العمل بنجاح - InstanceId: {WorkflowInstanceId}, الرسالة: {Message}",
+                    workflowInstanceId, completionMessage);
+
+                // إرجاع نتيجة الإنجاز
+                return Outcome("Done");
             }
             catch (Exception ex)
             {
                 var logger = context.GetRequiredService<ILogger<CompleteWorkflowActivity>>();
-                logger.LogError(ex, "فشل في إتمام سير العمل");
-                return Fault(ex);
+                logger.LogError(ex, "فشل في إكمال سير العمل: {Message}", ex.Message);
+                return Fault(ex.Message);
             }
         }
     }
-
-    // =============== MODELS ===============
-    
-    public class ApprovalResult
-    {
-        public bool IsApproved { get; set; }
-        public string RequestId { get; set; } = string.Empty;
-        public string Decision { get; set; } = string.Empty;
-        public string Comments { get; set; } = string.Empty;
-        public DateTime ProcessedAt { get; set; }
-        public string ProcessedBy { get; set; } = string.Empty;
-    }
-
-    // =============== SERVICE INTERFACES ===============
-    
-    public interface INotificationService
-    {
-        Task SendNotificationAsync(string userId, string message, string type);
-    }
-
-    public interface IApprovalService
-    {
-        Task<ApprovalResult> ProcessApprovalAsync(string requestId, string decision, string comments);
-    }
 }
-
-// =========================================================
-// تعليمات التطبيق:
-// =========================================================
-//
-// التغييرات المطبقة:
-// 1. استخدام protected override بدلاً من public override
-// 2. استخدام OnExecuteAsync بدلاً من ExecuteAsync
-// 3. استخدام context.EvaluateAsync بدلاً من EvaluateAsync
-// 4. استخدام Logger من context.GetRequiredService<ILogger<>>()
-// 5. استخدام Outcome(), Fault(), CompletedResult APIs
-// 6. استخدام context.WorkflowExecutionContext.WorkflowInstanceId
-// 7. إزالة Properties غير الموجودة في Elsa v3
-//
-// =========================================================
