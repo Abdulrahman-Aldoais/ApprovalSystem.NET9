@@ -3,29 +3,16 @@
 // إصلاح شامل لجميع الأخطاء المحددة
 // =========================================================
 
-using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
-using Elsa.Abstractions.Models.Enums;
-using Elsa.Models;
-using Elsa.Expressions;
-using Elsa.Contexts;
-using Elsa.Abstractions.Models;
+using Elsa.ActivityResults;
 using Elsa.Workflows;
-using Elsa.JavaScript;
+using Elsa.Workflows.Attributes;
 using Elsa.Workflows.Models;
-using Elsa.Abstractions;
-using Elsa.Abstractions.Models.Result;
-using Elsa.Result;
+using Microsoft.Extensions.Logging;
 
 namespace ApprovalSystem.Services.ElsaActivities
 {
     // =============== FIXED ACTIVITY CLASSES ===============
-    
+
     /// <summary>
     /// Activity لإرسال الإشعارات
     /// </summary>
@@ -33,10 +20,10 @@ namespace ApprovalSystem.Services.ElsaActivities
     {
         [Input]
         public Input<string> Message { get; set; } = default!;
-        
+
         [Input]
         public Input<string> Type { get; set; } = default!;
-        
+
         [Input]
         public Input<string> UserId { get; set; } = default!;
 
@@ -45,7 +32,7 @@ namespace ApprovalSystem.Services.ElsaActivities
             try
             {
                 // الحصول على ExpressionExecutionContext بطريقة Elsa v3
-                var expressionContext = context.GetExpressionExecutionContext() ?? 
+                var expressionContext = context.GetExpressionExecutionContext() ??
                                       context.Journal?.GetExpressionExecutionContext() ??
                                       context.GetExpressionExecutionContext();
 
@@ -93,10 +80,10 @@ namespace ApprovalSystem.Services.ElsaActivities
     {
         [Input]
         public Input<string> RequestId { get; set; } = default!;
-        
+
         [Input]
         public Input<string> Decision { get; set; } = default!;
-        
+
         [Input]
         public Input<string> Comments { get; set; } = default!;
 
@@ -105,7 +92,7 @@ namespace ApprovalSystem.Services.ElsaActivities
             try
             {
                 // الحصول على ExpressionExecutionContext
-                var expressionContext = context.GetExpressionExecutionContext() ?? 
+                var expressionContext = context.GetExpressionExecutionContext() ??
                                       context.Journal?.GetExpressionExecutionContext() ??
                                       context.GetExpressionExecutionContext();
 
@@ -147,7 +134,7 @@ namespace ApprovalSystem.Services.ElsaActivities
             {
                 return await approvalService.ProcessApprovalAsync(requestId, decision, comments);
             }
-            
+
             // Fallback: محاكاة المعالجة
             return new ApprovalResult
             {
@@ -167,7 +154,7 @@ namespace ApprovalSystem.Services.ElsaActivities
     {
         [Input]
         public Input<string> ResultMessage { get; set; } = default!;
-        
+
         [Input]
         public Input<bool> IsSuccessful { get; set; } = default!;
 
@@ -175,7 +162,7 @@ namespace ApprovalSystem.Services.ElsaActivities
         {
             try
             {
-                var expressionContext = context.GetExpressionExecutionContext() ?? 
+                var expressionContext = context.GetExpressionExecutionContext() ??
                                       context.Journal?.GetExpressionExecutionContext() ??
                                       context.GetExpressionExecutionContext();
 
@@ -213,7 +200,7 @@ namespace ApprovalSystem.Services.ElsaActivities
     }
 
     // =============== HELPER CLASSES ===============
-    
+
     /// <summary>
     /// Result class للـ Activities
     /// </summary>
@@ -271,10 +258,10 @@ namespace ApprovalSystem.Services.ElsaActivities
     /// <summary>
     /// ErrorActivityResult مع تنفيذ صحيح للواجهة
     /// </summary>
-    public class ErrorActivityResult : ActivityExecutionResult
+    public class ErrorActivityResult : Elsa.ActivityResults.ActivityExecutionResult
     {
         public string ErrorMessage { get; }
-        
+
         public ErrorActivityResult(string errorMessage)
         {
             ErrorMessage = errorMessage;
@@ -288,7 +275,7 @@ namespace ApprovalSystem.Services.ElsaActivities
     }
 
     // =============== MODELS ===============
-    
+
     public class ApprovalResult
     {
         public bool IsApproved { get; set; }
@@ -300,7 +287,7 @@ namespace ApprovalSystem.Services.ElsaActivities
     }
 
     // =============== SERVICE INTERFACES ===============
-    
+
     public interface INotificationService
     {
         Task SendNotificationAsync(string userId, string message, string type);

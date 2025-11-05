@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1B1EF8AB-EEC5-4368-9E87-4E0AE03A0EE3}|ApprovalSystem.API\\ApprovalSystem.API.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.api\\approvalsystem.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{1B1EF8AB-EEC5-4368-9E87-4E0AE03A0EE3}|ApprovalSystem.API\\ApprovalSystem.API.csproj|solutionrelative:approvalsystem.api\\approvalsystem.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A65F7F17-DD93-4A58-8720-58922ED17B7C}|ApprovalSystem.Core\\ApprovalSystem.Core.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.core\\approvalsystem.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A65F7F17-DD93-4A58-8720-58922ED17B7C}|ApprovalSystem.Core\\ApprovalSystem.Core.csproj|solutionrelative:approvalsystem.core\\approvalsystem.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.services\\elsaactivities\\additionalworkflowactivities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|solutionrelative:approvalsystem.services\\elsaactivities\\additionalworkflowactivities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.services\\elsaactivities\\approvalworkflowactivities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|solutionrelative:approvalsystem.services\\elsaactivities\\approvalworkflowactivities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18617EE5-B560-463E-BE25-50086B1A5BF2}|ApprovalSystem.Infrastructure\\ApprovalSystem.Infrastructure.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18617EE5-B560-463E-BE25-50086B1A5BF2}|ApprovalSystem.Infrastructure\\ApprovalSystem.Infrastructure.csproj|solutionrelative:approvalsystem.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.services\\configuration\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|solutionrelative:approvalsystem.services\\configuration\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.services\\helpers\\elsahelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|solutionrelative:approvalsystem.services\\helpers\\elsahelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1B1EF8AB-EEC5-4368-9E87-4E0AE03A0EE3}|ApprovalSystem.API\\ApprovalSystem.API.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.api\\approvalsystem.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{1B1EF8AB-EEC5-4368-9E87-4E0AE03A0EE3}|ApprovalSystem.API\\ApprovalSystem.API.csproj|solutionrelative:approvalsystem.api\\approvalsystem.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.services\\configuration\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70A78E52-20A1-4444-8F82-54A9E82C3D5B}|ApprovalSystem.Services\\ApprovalSystem.Services.csproj|solutionrelative:approvalsystem.services\\configuration\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18617EE5-B560-463E-BE25-50086B1A5BF2}|ApprovalSystem.Infrastructure\\ApprovalSystem.Infrastructure.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18617EE5-B560-463E-BE25-50086B1A5BF2}|ApprovalSystem.Infrastructure\\ApprovalSystem.Infrastructure.csproj|solutionrelative:approvalsystem.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D73015FA-5A19-4C43-BF45-891B2CF2F740}|ApprovalSystem.Models\\ApprovalSystem.Models.csproj|c:\\users\\user\\downloads\\compressed\\all_files_13\\approvalsystem.net9\\approvalsystem.models\\entities\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -66,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 15,
           "Children": [
             {
               "$type": "Bookmark",
@@ -109,83 +109,59 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApprovalSystem.Core",
+              "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Core\\ApprovalSystem.Core.csproj",
+              "RelativeDocumentMoniker": "ApprovalSystem.Core\\ApprovalSystem.Core.csproj",
+              "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Core\\ApprovalSystem.Core.csproj",
+              "RelativeToolTip": "ApprovalSystem.Core\\ApprovalSystem.Core.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-05T01:31:13.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cde3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ApprovalWorkflowActivities.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\ElsaActivities\\ApprovalWorkflowActivities.cs",
-              "RelativeDocumentMoniker": "ApprovalSystem.Services\\ElsaActivities\\ApprovalWorkflowActivities.cs",
-              "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\ElsaActivities\\ApprovalWorkflowActivities.cs",
-              "RelativeToolTip": "ApprovalSystem.Services\\ElsaActivities\\ApprovalWorkflowActivities.cs",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAWwIcAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:54:56.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "ApprovalSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
               "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "ApprovalSystem.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAALwAAAAAAAAAAAArwMoAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAgwOYAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:24:19.072Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:24:19.072Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ElsaHelper.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Helpers\\ElsaHelper.cs",
               "RelativeDocumentMoniker": "ApprovalSystem.Services\\Helpers\\ElsaHelper.cs",
               "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Helpers\\ElsaHelper.cs",
               "RelativeToolTip": "ApprovalSystem.Services\\Helpers\\ElsaHelper.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAD4v2QAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAuwG8AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:14:31.587Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:14:31.587Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AdditionalWorkflowActivities.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
-              "RelativeDocumentMoniker": "ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
-              "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
-              "RelativeToolTip": "ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
-              "ViewState": "AgIAAC0CAAAAAAAAAAAowDUCAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:24:54.074Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "RuleEngine.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
-              "RelativeDocumentMoniker": "ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
-              "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
-              "RelativeToolTip": "ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:24:51.666Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "ApprovalSystem.API.csproj",
               "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.API\\ApprovalSystem.API.csproj",
               "RelativeDocumentMoniker": "ApprovalSystem.API\\ApprovalSystem.API.csproj",
               "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.API\\ApprovalSystem.API.csproj",
               "RelativeToolTip": "ApprovalSystem.API\\ApprovalSystem.API.csproj",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-11-04T23:16:38.999Z",
               "EditorCaption": ""
@@ -200,21 +176,44 @@
               "RelativeToolTip": "ApprovalSystem.Models\\Entities\\Tenant.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAxwCsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:27:08.742Z",
+              "WhenOpened": "2025-11-04T23:27:08.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdditionalWorkflowActivities.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
+              "RelativeDocumentMoniker": "ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
+              "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
+              "RelativeToolTip": "ApprovalSystem.Services\\ElsaActivities\\AdditionalWorkflowActivities.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAQwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T23:24:54.074Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "ConfigurationService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Configuration\\ConfigurationService.cs",
               "RelativeDocumentMoniker": "ApprovalSystem.Services\\Configuration\\ConfigurationService.cs",
               "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Configuration\\ConfigurationService.cs",
               "RelativeToolTip": "ApprovalSystem.Services\\Configuration\\ConfigurationService.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:28:58.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:28:58.154Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RuleEngine.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
+              "RelativeDocumentMoniker": "ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
+              "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
+              "RelativeToolTip": "ApprovalSystem.Services\\Configuration\\RuleEngine.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T23:24:51.666Z"
             },
             {
               "$type": "Document",
@@ -224,10 +223,9 @@
               "RelativeDocumentMoniker": "ApprovalSystem.ViewModels\\RequestViewModels.cs",
               "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.ViewModels\\RequestViewModels.cs",
               "RelativeToolTip": "ApprovalSystem.ViewModels\\RequestViewModels.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowAMAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA9wAMAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:16:41.739Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:16:41.739Z"
             },
             {
               "$type": "Document",
@@ -239,8 +237,7 @@
               "RelativeToolTip": "ApprovalSystem.Models\\DTOs\\RequestDTOs.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:15:31.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:15:31.559Z"
             },
             {
               "$type": "Document",
@@ -250,10 +247,9 @@
               "RelativeDocumentMoniker": "ApprovalSystem.Core\\Interfaces\\INotificationService.cs",
               "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Core\\Interfaces\\INotificationService.cs",
               "RelativeToolTip": "ApprovalSystem.Core\\Interfaces\\INotificationService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:13:29.88Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:13:29.88Z"
             },
             {
               "$type": "Document",
@@ -265,8 +261,7 @@
               "RelativeToolTip": "ApprovalSystem.Core\\Interfaces\\IEmailService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:13:27.921Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:13:27.921Z"
             },
             {
               "$type": "Document",
@@ -276,10 +271,9 @@
               "RelativeDocumentMoniker": "ApprovalSystem.Models\\DTOs\\RuleEngineDTOs.cs",
               "ToolTip": "C:\\Users\\USER\\Downloads\\Compressed\\all_files_13\\ApprovalSystem.NET9\\ApprovalSystem.Models\\DTOs\\RuleEngineDTOs.cs",
               "RelativeToolTip": "ApprovalSystem.Models\\DTOs\\RuleEngineDTOs.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAA+wDQAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAuwDQAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:11:22.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:11:22.296Z"
             },
             {
               "$type": "Document",
@@ -291,8 +285,7 @@
               "RelativeToolTip": "ApprovalSystem.Core\\Interfaces\\IBackgroundJobService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T23:13:26.537Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T23:13:26.537Z"
             }
           ]
         }

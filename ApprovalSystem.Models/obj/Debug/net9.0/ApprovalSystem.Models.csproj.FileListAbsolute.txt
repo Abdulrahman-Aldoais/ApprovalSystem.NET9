@@ -12,3 +12,4 @@ C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSyst
 C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.pdb
 C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.genruntimeconfig.cache
 C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ref\ApprovalSystem.Models.dll
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Models\obj\Debug\net9.0\ApprovalSystem.Models.sourcelink.json

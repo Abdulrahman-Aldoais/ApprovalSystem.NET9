@@ -3,3 +3,4 @@ C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSyst
 C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Core\obj\Debug\net9.0\ApprovalSystem.Core.AssemblyInfoInputs.cache
 C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Core\obj\Debug\net9.0\ApprovalSystem.Core.AssemblyInfo.cs
 C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Core\obj\Debug\net9.0\ApprovalSystem.Core.csproj.CoreCompileInputs.cache
+C:\Users\USER\Downloads\Compressed\all_files_13\ApprovalSystem.NET9\ApprovalSystem.Core\obj\Debug\net9.0\ApprovalSystem.Core.sourcelink.json
