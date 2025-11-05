@@ -1,18 +1,28 @@
 // =========================================================
-// AdditionalWorkflowActivities.cs - مُصحح لـ .NET 9 & Elsa v3
-// إصلاح شامل لجميع الأخطاء المحددة
+// AdditionalWorkflowActivities.cs - مُصحح للـ Elsa v3 الصحيح
+// إصلاح API أخطاء Elsa Framework v3
 // =========================================================
 
-using Elsa.ActivityResults;
-using Elsa.Workflows;
-using Elsa.Workflows.Attributes;
-using Elsa.Workflows.Models;
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using Elsa;
+using Elsa.ActivityResults;
+using Elsa.Abstractions.Models;
+using Elsa.Expressions;
+using Elsa.Models;
+using Elsa.Services;
+using Elsa.Services.Models;
+using System.Threading;
 
 namespace ApprovalSystem.Services.ElsaActivities
 {
     // =============== FIXED ACTIVITY CLASSES ===============
-
+    
     /// <summary>
     /// Activity لإرسال الإشعارات
     /// </summary>
@@ -20,55 +30,58 @@ namespace ApprovalSystem.Services.ElsaActivities
     {
         [Input]
         public Input<string> Message { get; set; } = default!;
-
+        
         [Input]
         public Input<string> Type { get; set; } = default!;
-
+        
         [Input]
         public Input<string> UserId { get; set; } = default!;
 
-        public override async ValueTask<IActivityExecutionResult> ExecuteAsync(ActivityExecutionContext context)
+        protected override async ValueTask<IActivityExecutionResult> OnExecuteAsync(ActivityExecutionContext context)
         {
             try
             {
-                // الحصول على ExpressionExecutionContext بطريقة Elsa v3
-                var expressionContext = context.GetExpressionExecutionContext() ??
-                                      context.Journal?.GetExpressionExecutionContext() ??
-                                      context.GetExpressionExecutionContext();
+                // الحصول على المدخلات بطريقة صحيحة
+                var message = await context.EvaluateAsync(Message, context.CancellationToken);
+                var notificationType = await context.EvaluateAsync(Type, context.CancellationToken);
+                var userId = await context.EvaluateAsync(UserId, context.CancellationToken);
 
-                // تقييم المدخلات
-                var message = await EvaluateAsync<string>(Message, context);
-                var notificationType = await EvaluateAsync<string>(Type, context);
-                var userId = await EvaluateAsync<string>(UserId, context);
-
-                // إرسال الإشعار (طقيفة قابلة للتمديد)
+                // إرسال الإشعار
                 await SendNotificationAsync(message, notificationType, userId, context);
 
-                // إنشاء النتيجة باستخدام Elsa v3 API
-                return new ActivityExecutionResult("completed")
-                {
-                    Output = new { Message = message, Type = notificationType, UserId = userId }
-                };
+                return Outcome("Sent");
             }
             catch (Exception ex)
             {
-                context.LogError(this, ex, "فشل في إرسال الإشعار");
-                return new ErrorActivityResult(ex.Message);
+                var logger = context.GetRequiredService<ILogger<SendNotificationActivity>>();
+                logger.LogError(ex, "فشل في إرسال الإشعار");
+                return Fault(ex);
             }
         }
 
         private async Task SendNotificationAsync(string message, string type, string userId, ActivityExecutionContext context)
         {
-            // الحصول على NotificationService
-            var notificationService = context.GetService<INotificationService>();
-            if (notificationService != null)
+            try
             {
-                await notificationService.SendNotificationAsync(userId, message, type);
+                // استخدام Logger بدلاً من context.LogError
+                var logger = context.GetRequiredService<ILogger<SendNotificationActivity>>();
+                
+                // الحصول على NotificationService
+                var notificationService = context.GetService<INotificationService>();
+                if (notificationService != null)
+                {
+                    await notificationService.SendNotificationAsync(userId, message, type);
+                }
+                else
+                {
+                    logger.LogWarning("NotificationService غير متوفر، تسجيل الرسالة فقط");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Fallback: Log instead of throwing
-                context.LogWarning(this, "NotificationService غير متوفر، تسجيل الرسالة فقط");
+                var logger = context.GetRequiredService<ILogger<SendNotificationActivity>>();
+                logger.LogError(ex, "فشل في إرسال الإشعار");
+                throw;
             }
         }
     }
@@ -80,26 +93,21 @@ namespace ApprovalSystem.Services.ElsaActivities
     {
         [Input]
         public Input<string> RequestId { get; set; } = default!;
-
+        
         [Input]
         public Input<string> Decision { get; set; } = default!;
-
+        
         [Input]
         public Input<string> Comments { get; set; } = default!;
 
-        public override async ValueTask<IActivityExecutionResult> ExecuteAsync(ActivityExecutionContext context)
+        protected override async ValueTask<IActivityExecutionResult> OnExecuteAsync(ActivityExecutionContext context)
         {
             try
             {
-                // الحصول على ExpressionExecutionContext
-                var expressionContext = context.GetExpressionExecutionContext() ??
-                                      context.Journal?.GetExpressionExecutionContext() ??
-                                      context.GetExpressionExecutionContext();
-
-                // تقييم المدخلات
-                var requestId = await EvaluateAsync<string>(RequestId, context);
-                var decision = await EvaluateAsync<string>(Decision, context);
-                var comments = await EvaluateAsync<string>(Comments, context);
+                // الحصول على المدخلات
+                var requestId = await context.EvaluateAsync(RequestId, context.CancellationToken);
+                var decision = await context.EvaluateAsync(Decision, context.CancellationToken);
+                var comments = await context.EvaluateAsync(Comments, context.CancellationToken);
 
                 // معالجة القرار
                 var approvalResult = await ProcessApprovalAsync(requestId, decision, comments, context);
@@ -107,23 +115,18 @@ namespace ApprovalSystem.Services.ElsaActivities
                 // إرجاع النتيجة بناءً على القرار
                 if (approvalResult.IsApproved)
                 {
-                    return new OutcomeResult("approved", approvalResult)
-                    {
-                        Output = approvalResult
-                    };
+                    return Outcome("approved");
                 }
                 else
                 {
-                    return new OutcomeResult("rejected", approvalResult)
-                    {
-                        Output = approvalResult
-                    };
+                    return Outcome("rejected");
                 }
             }
             catch (Exception ex)
             {
-                context.LogError(this, ex, "فشل في معالجة قرار الموافقة");
-                return new ErrorActivityResult(ex.Message);
+                var logger = context.GetRequiredService<ILogger<ProcessApprovalDecisionActivity>>();
+                logger.LogError(ex, "فشل في معالجة قرار الموافقة");
+                return Fault(ex);
             }
         }
 
@@ -134,7 +137,7 @@ namespace ApprovalSystem.Services.ElsaActivities
             {
                 return await approvalService.ProcessApprovalAsync(requestId, decision, comments);
             }
-
+            
             // Fallback: محاكاة المعالجة
             return new ApprovalResult
             {
@@ -154,20 +157,16 @@ namespace ApprovalSystem.Services.ElsaActivities
     {
         [Input]
         public Input<string> ResultMessage { get; set; } = default!;
-
+        
         [Input]
         public Input<bool> IsSuccessful { get; set; } = default!;
 
-        public override async ValueTask<IActivityExecutionResult> ExecuteAsync(ActivityExecutionContext context)
+        protected override async ValueTask<IActivityExecutionResult> OnExecuteAsync(ActivityExecutionContext context)
         {
             try
             {
-                var expressionContext = context.GetExpressionExecutionContext() ??
-                                      context.Journal?.GetExpressionExecutionContext() ??
-                                      context.GetExpressionExecutionContext();
-
-                var resultMessage = await EvaluateAsync<string>(ResultMessage, context);
-                var isSuccessful = await EvaluateAsync<bool>(IsSuccessful, context);
+                var resultMessage = await context.EvaluateAsync(ResultMessage, context.CancellationToken);
+                var isSuccessful = await context.EvaluateAsync(IsSuccessful, context.CancellationToken);
 
                 // إنشاء النتيجة النهائية
                 var finalResult = new
@@ -175,107 +174,32 @@ namespace ApprovalSystem.Services.ElsaActivities
                     Message = resultMessage,
                     IsSuccessful = isSuccessful,
                     CompletedAt = DateTime.UtcNow,
-                    WorkflowInstanceId = context.WorkflowInstanceId
+                    WorkflowInstanceId = context.WorkflowExecutionContext.WorkflowInstanceId
                 };
 
                 if (isSuccessful)
                 {
-                    // إرجاع Result بدلاً من Outcome للـ Complete workflow
-                    return new Result(finalResult)
+                    return new CompletedResult
                     {
                         Output = finalResult
                     };
                 }
                 else
                 {
-                    return new ErrorActivityResult(resultMessage);
+                    return Fault(resultMessage);
                 }
             }
             catch (Exception ex)
             {
-                context.LogError(this, ex, "فشل في إتمام سير العمل");
-                return new ErrorActivityResult(ex.Message);
+                var logger = context.GetRequiredService<ILogger<CompleteWorkflowActivity>>();
+                logger.LogError(ex, "فشل في إتمام سير العمل");
+                return Fault(ex);
             }
         }
     }
 
-    // =============== HELPER CLASSES ===============
-
-    /// <summary>
-    /// Result class للـ Activities
-    /// </summary>
-    public class Result : ActivityExecutionResult
-    {
-        public string Status { get; }
-        public object Output { get; set; }
-
-        public Result(string status)
-        {
-            Status = status;
-        }
-
-        public Result(string status, object output)
-        {
-            Status = status;
-            Output = output;
-        }
-
-        public override Task ExecuteAsync(ActivityExecutionContext context, CancellationToken cancellationToken = default)
-        {
-            // Log the result
-            context.LogInformation(this, $"Workflow completed with status: {Status}");
-            return Task.CompletedTask;
-        }
-    }
-
-    /// <summary>
-    /// OutcomeResult class للأنواع المختلفة من النتائج
-    /// </summary>
-    public class OutcomeResult : ActivityExecutionResult
-    {
-        public string Key { get; }
-        public object Value { get; set; }
-        public object Output { get; set; }
-
-        public OutcomeResult(string key, object value)
-        {
-            Key = key;
-            Value = value;
-        }
-
-        public OutcomeResult(string key, object value, object output) : this(key, value)
-        {
-            Output = output;
-        }
-
-        public override Task ExecuteAsync(ActivityExecutionContext context, CancellationToken cancellationToken = default)
-        {
-            context.LogInformation(this, $"Outcome {Key} = {Value}");
-            return Task.CompletedTask;
-        }
-    }
-
-    /// <summary>
-    /// ErrorActivityResult مع تنفيذ صحيح للواجهة
-    /// </summary>
-    public class ErrorActivityResult : Elsa.ActivityResults.ActivityExecutionResult
-    {
-        public string ErrorMessage { get; }
-
-        public ErrorActivityResult(string errorMessage)
-        {
-            ErrorMessage = errorMessage;
-        }
-
-        public override Task ExecuteAsync(ActivityExecutionContext context, CancellationToken cancellationToken = default)
-        {
-            context.LogError(this, $"Activity execution failed: {ErrorMessage}");
-            return Task.CompletedTask;
-        }
-    }
-
     // =============== MODELS ===============
-
+    
     public class ApprovalResult
     {
         public bool IsApproved { get; set; }
@@ -287,7 +211,7 @@ namespace ApprovalSystem.Services.ElsaActivities
     }
 
     // =============== SERVICE INTERFACES ===============
-
+    
     public interface INotificationService
     {
         Task SendNotificationAsync(string userId, string message, string type);
@@ -303,9 +227,13 @@ namespace ApprovalSystem.Services.ElsaActivities
 // تعليمات التطبيق:
 // =========================================================
 //
-// 1. استبدال context.ExpressionExecutionContext بـ context.GetExpressionExecutionContext()
-// 2. استخدام public override ValueTask<IActivityExecutionResult> ExecuteAsync()
-// 3. استخدام Result, OutcomeResult, ErrorActivityResult بدلاً من استخدام Activity.Outcome()
-// 4. التأكد من تنفيذ ExecuteAsync في جميع Result classes
+// التغييرات المطبقة:
+// 1. استخدام protected override بدلاً من public override
+// 2. استخدام OnExecuteAsync بدلاً من ExecuteAsync
+// 3. استخدام context.EvaluateAsync بدلاً من EvaluateAsync
+// 4. استخدام Logger من context.GetRequiredService<ILogger<>>()
+// 5. استخدام Outcome(), Fault(), CompletedResult APIs
+// 6. استخدام context.WorkflowExecutionContext.WorkflowInstanceId
+// 7. إزالة Properties غير الموجودة في Elsa v3
 //
 // =========================================================
